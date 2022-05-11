@@ -39,31 +39,32 @@
             this.NickName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Stavka = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
             this.PlayerPoints = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.FirstRoundPoints = new System.Windows.Forms.Label();
+            this.PlayerSumPointsRound1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.SecondRoundPoints = new System.Windows.Forms.Label();
+            this.PlayerSumPointsRound2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.ThirdRoundPoint = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.OpponentPoint = new System.Windows.Forms.Label();
+            this.PlayerSumPointsRound3 = new System.Windows.Forms.Label();
+            this.OpponentSumPointsRound3 = new System.Windows.Forms.Label();
+            this.OpponentSumPointsRound2 = new System.Windows.Forms.Label();
+            this.OpponentSumPointsRound1 = new System.Windows.Forms.Label();
+            this.OpponentPoints = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.OpponentScore = new System.Windows.Forms.Label();
             this.PlayerScore = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(218, 468);
             this.button1.Name = "button1";
@@ -73,6 +74,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.Location = new System.Drawing.Point(528, 498);
             this.button2.Name = "button2";
@@ -82,6 +84,7 @@
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.Location = new System.Drawing.Point(813, 464);
             this.button3.Name = "button3";
@@ -160,34 +163,35 @@
             this.button7.Text = "Сделать ставку";
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // Stavka
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 489);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(111, 20);
-            this.textBox1.TabIndex = 10;
+            this.Stavka.Location = new System.Drawing.Point(12, 489);
+            this.Stavka.Name = "Stavka";
+            this.Stavka.Size = new System.Drawing.Size(111, 20);
+            this.Stavka.TabIndex = 10;
+            this.Stavka.Text = "100";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label50.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label50.Location = new System.Drawing.Point(9, 609);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(86, 18);
+            this.label50.TabIndex = 11;
+            this.label50.Text = "Ваши очки:";
             // 
             // PlayerPoints
             // 
             this.PlayerPoints.AutoSize = true;
             this.PlayerPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PlayerPoints.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.PlayerPoints.Location = new System.Drawing.Point(9, 609);
+            this.PlayerPoints.Location = new System.Drawing.Point(9, 627);
             this.PlayerPoints.Name = "PlayerPoints";
-            this.PlayerPoints.Size = new System.Drawing.Size(86, 18);
-            this.PlayerPoints.TabIndex = 11;
-            this.PlayerPoints.Text = "Ваши очки:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Location = new System.Drawing.Point(9, 627);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 18);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "1000";
+            this.PlayerPoints.Size = new System.Drawing.Size(40, 18);
+            this.PlayerPoints.TabIndex = 12;
+            this.PlayerPoints.Text = "1000";
             // 
             // label5
             // 
@@ -196,20 +200,20 @@
             this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label5.Location = new System.Drawing.Point(983, 464);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(181, 20);
+            this.label5.Size = new System.Drawing.Size(193, 20);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Сумма очков 1 раунда:";
+            this.label5.Text = "Сумма очков за 1 раунд:";
             // 
-            // FirstRoundPoints
+            // PlayerSumPointsRound1
             // 
-            this.FirstRoundPoints.AutoSize = true;
-            this.FirstRoundPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FirstRoundPoints.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.FirstRoundPoints.Location = new System.Drawing.Point(983, 487);
-            this.FirstRoundPoints.Name = "FirstRoundPoints";
-            this.FirstRoundPoints.Size = new System.Drawing.Size(18, 20);
-            this.FirstRoundPoints.TabIndex = 14;
-            this.FirstRoundPoints.Text = "0";
+            this.PlayerSumPointsRound1.AutoSize = true;
+            this.PlayerSumPointsRound1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PlayerSumPointsRound1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.PlayerSumPointsRound1.Location = new System.Drawing.Point(983, 487);
+            this.PlayerSumPointsRound1.Name = "PlayerSumPointsRound1";
+            this.PlayerSumPointsRound1.Size = new System.Drawing.Size(18, 20);
+            this.PlayerSumPointsRound1.TabIndex = 14;
+            this.PlayerSumPointsRound1.Text = "0";
             // 
             // label7
             // 
@@ -218,20 +222,20 @@
             this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label7.Location = new System.Drawing.Point(983, 507);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(181, 20);
+            this.label7.Size = new System.Drawing.Size(202, 20);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Сумма очков 2 раунда:";
+            this.label7.Text = "Сумма очков за 2 раунда:";
             // 
-            // SecondRoundPoints
+            // PlayerSumPointsRound2
             // 
-            this.SecondRoundPoints.AutoSize = true;
-            this.SecondRoundPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SecondRoundPoints.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.SecondRoundPoints.Location = new System.Drawing.Point(983, 529);
-            this.SecondRoundPoints.Name = "SecondRoundPoints";
-            this.SecondRoundPoints.Size = new System.Drawing.Size(18, 20);
-            this.SecondRoundPoints.TabIndex = 16;
-            this.SecondRoundPoints.Text = "0";
+            this.PlayerSumPointsRound2.AutoSize = true;
+            this.PlayerSumPointsRound2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PlayerSumPointsRound2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.PlayerSumPointsRound2.Location = new System.Drawing.Point(983, 529);
+            this.PlayerSumPointsRound2.Name = "PlayerSumPointsRound2";
+            this.PlayerSumPointsRound2.Size = new System.Drawing.Size(18, 20);
+            this.PlayerSumPointsRound2.TabIndex = 16;
+            this.PlayerSumPointsRound2.Text = "0";
             // 
             // label9
             // 
@@ -240,97 +244,64 @@
             this.label9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label9.Location = new System.Drawing.Point(983, 551);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(181, 20);
+            this.label9.Size = new System.Drawing.Size(202, 20);
             this.label9.TabIndex = 17;
-            this.label9.Text = "Сумма очков 3 раунда:";
+            this.label9.Text = "Сумма очков за 3 раунда:";
             // 
-            // ThirdRoundPoint
+            // PlayerSumPointsRound3
             // 
-            this.ThirdRoundPoint.AutoSize = true;
-            this.ThirdRoundPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ThirdRoundPoint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ThirdRoundPoint.Location = new System.Drawing.Point(983, 571);
-            this.ThirdRoundPoint.Name = "ThirdRoundPoint";
-            this.ThirdRoundPoint.Size = new System.Drawing.Size(18, 20);
-            this.ThirdRoundPoint.TabIndex = 18;
-            this.ThirdRoundPoint.Text = "0";
+            this.PlayerSumPointsRound3.AutoSize = true;
+            this.PlayerSumPointsRound3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PlayerSumPointsRound3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.PlayerSumPointsRound3.Location = new System.Drawing.Point(983, 571);
+            this.PlayerSumPointsRound3.Name = "PlayerSumPointsRound3";
+            this.PlayerSumPointsRound3.Size = new System.Drawing.Size(18, 20);
+            this.PlayerSumPointsRound3.TabIndex = 18;
+            this.PlayerSumPointsRound3.Text = "0";
             // 
-            // label6
+            // OpponentSumPointsRound3
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label6.Location = new System.Drawing.Point(983, 121);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(18, 20);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "0";
+            this.OpponentSumPointsRound3.AutoSize = true;
+            this.OpponentSumPointsRound3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OpponentSumPointsRound3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OpponentSumPointsRound3.Location = new System.Drawing.Point(983, 121);
+            this.OpponentSumPointsRound3.Name = "OpponentSumPointsRound3";
+            this.OpponentSumPointsRound3.Size = new System.Drawing.Size(18, 20);
+            this.OpponentSumPointsRound3.TabIndex = 24;
+            this.OpponentSumPointsRound3.Text = "0";
             // 
-            // label8
+            // OpponentSumPointsRound2
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label8.Location = new System.Drawing.Point(983, 101);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(181, 20);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Сумма очков 3 раунда:";
+            this.OpponentSumPointsRound2.AutoSize = true;
+            this.OpponentSumPointsRound2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OpponentSumPointsRound2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OpponentSumPointsRound2.Location = new System.Drawing.Point(983, 79);
+            this.OpponentSumPointsRound2.Name = "OpponentSumPointsRound2";
+            this.OpponentSumPointsRound2.Size = new System.Drawing.Size(18, 20);
+            this.OpponentSumPointsRound2.TabIndex = 22;
+            this.OpponentSumPointsRound2.Text = "0";
             // 
-            // label10
+            // OpponentSumPointsRound1
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label10.Location = new System.Drawing.Point(983, 79);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(18, 20);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "0";
+            this.OpponentSumPointsRound1.AutoSize = true;
+            this.OpponentSumPointsRound1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OpponentSumPointsRound1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OpponentSumPointsRound1.Location = new System.Drawing.Point(983, 37);
+            this.OpponentSumPointsRound1.Name = "OpponentSumPointsRound1";
+            this.OpponentSumPointsRound1.Size = new System.Drawing.Size(18, 20);
+            this.OpponentSumPointsRound1.TabIndex = 20;
+            this.OpponentSumPointsRound1.Text = "0";
             // 
-            // label11
+            // OpponentPoints
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label11.Location = new System.Drawing.Point(983, 57);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(181, 20);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "Сумма очков 2 раунда:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label12.Location = new System.Drawing.Point(983, 37);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(18, 20);
-            this.label12.TabIndex = 20;
-            this.label12.Text = "0";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label13.Location = new System.Drawing.Point(983, 14);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(181, 20);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "Сумма очков 1 раунда:";
-            // 
-            // OpponentPoint
-            // 
-            this.OpponentPoint.AutoSize = true;
-            this.OpponentPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OpponentPoint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpponentPoint.Location = new System.Drawing.Point(9, 175);
-            this.OpponentPoint.Name = "OpponentPoint";
-            this.OpponentPoint.Size = new System.Drawing.Size(40, 18);
-            this.OpponentPoint.TabIndex = 26;
-            this.OpponentPoint.Text = "1000";
+            this.OpponentPoints.AutoSize = true;
+            this.OpponentPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OpponentPoints.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OpponentPoints.Location = new System.Drawing.Point(9, 175);
+            this.OpponentPoints.Name = "OpponentPoints";
+            this.OpponentPoints.Size = new System.Drawing.Size(40, 18);
+            this.OpponentPoints.TabIndex = 26;
+            this.OpponentPoints.Text = "1000";
             // 
             // label15
             // 
@@ -383,32 +354,65 @@
             this.PlayerScore.TabIndex = 30;
             this.PlayerScore.Text = "0";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label8.Location = new System.Drawing.Point(983, 103);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(202, 20);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "Сумма очков за 3 раунда:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label11.Location = new System.Drawing.Point(983, 59);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(202, 20);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Сумма очков за 2 раунда:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label13.Location = new System.Drawing.Point(983, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(193, 20);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Сумма очков за 1 раунд:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1185, 672);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.PlayerScore);
             this.Controls.Add(this.OpponentScore);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.OpponentPoint);
+            this.Controls.Add(this.OpponentPoints);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.ThirdRoundPoint);
+            this.Controls.Add(this.OpponentSumPointsRound3);
+            this.Controls.Add(this.OpponentSumPointsRound2);
+            this.Controls.Add(this.OpponentSumPointsRound1);
+            this.Controls.Add(this.PlayerSumPointsRound3);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.SecondRoundPoints);
+            this.Controls.Add(this.PlayerSumPointsRound2);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.FirstRoundPoints);
+            this.Controls.Add(this.PlayerSumPointsRound1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.PlayerPoints);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label50);
+            this.Controls.Add(this.Stavka);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NickName);
@@ -440,27 +444,27 @@
         private System.Windows.Forms.Label NickName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox Stavka;
+        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label PlayerPoints;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label FirstRoundPoints;
+        private System.Windows.Forms.Label PlayerSumPointsRound1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label SecondRoundPoints;
+        private System.Windows.Forms.Label PlayerSumPointsRound2;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label ThirdRoundPoint;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label OpponentPoint;
+        private System.Windows.Forms.Label PlayerSumPointsRound3;
+        private System.Windows.Forms.Label OpponentSumPointsRound3;
+        private System.Windows.Forms.Label OpponentSumPointsRound2;
+        private System.Windows.Forms.Label OpponentSumPointsRound1;
+        private System.Windows.Forms.Label OpponentPoints;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label OpponentScore;
         private System.Windows.Forms.Label PlayerScore;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label13;
     }
 }
 

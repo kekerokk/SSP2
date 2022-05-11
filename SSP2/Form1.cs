@@ -12,7 +12,7 @@ namespace SSP2
 {
     public partial class Form1 : Form
     {
-        Form F2;
+        private int round = 1, stavka = 100;
         public Form1()
         {
             InitializeComponent();
@@ -24,6 +24,21 @@ namespace SSP2
         private void Form1_Enter(object sender, EventArgs e)
         {
             NickName.Text = StaticData.Nick;
+        }
+        private void StavkaChanged()
+        {
+            if(round == 1)
+            {
+                stavka = 100;
+                Stavka.Text = "100";
+            }
+            else
+            {
+                int TwelwProcent = 
+                stavka = Convert.ToInt32(Stavka.Text);
+                int PP = Convert.ToInt32(PlayerPoints.Text);
+                if((stavka <= stavka/(PP/100) && (stavka >=)
+            }
         }
     }
 }
