@@ -66,6 +66,8 @@
             this.labelOpponentStavka = new System.Windows.Forms.Label();
             this.StavkaOpponenta = new System.Windows.Forms.Label();
             this.StavkaPlayer = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Rock
@@ -161,15 +163,15 @@
             this.labelStavka.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelStavka.Location = new System.Drawing.Point(9, 468);
             this.labelStavka.Name = "labelStavka";
-            this.labelStavka.Size = new System.Drawing.Size(114, 18);
+            this.labelStavka.Size = new System.Drawing.Size(110, 18);
             this.labelStavka.TabIndex = 8;
-            this.labelStavka.Text = "Первая ставка:";
+            this.labelStavka.Text = "Первая ставка";
             // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.Transparent;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(12, 524);
+            this.button7.Location = new System.Drawing.Point(12, 543);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(111, 25);
             this.button7.TabIndex = 9;
@@ -445,11 +447,12 @@
             // 
             // NextBut
             // 
+            this.NextBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.NextBut.Location = new System.Drawing.Point(318, 322);
             this.NextBut.Name = "NextBut";
             this.NextBut.Size = new System.Drawing.Size(198, 40);
             this.NextBut.TabIndex = 37;
-            this.NextBut.Text = "Дальше";
+            this.NextBut.Text = "Следующая разыгровка";
             this.NextBut.UseVisualStyleBackColor = true;
             this.NextBut.Visible = false;
             this.NextBut.Click += new System.EventHandler(this.NextBut_Click);
@@ -490,12 +493,34 @@
             this.StavkaPlayer.TabIndex = 40;
             this.StavkaPlayer.Text = "0";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 515);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 23);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "min";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(73, 515);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(50, 23);
+            this.button2.TabIndex = 42;
+            this.button2.Text = "max";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1185, 672);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.StavkaPlayer);
             this.Controls.Add(this.StavkaOpponenta);
             this.Controls.Add(this.labelOpponentStavka);
@@ -581,6 +606,8 @@
         private System.Windows.Forms.Label labelOpponentStavka;
         private System.Windows.Forms.Label StavkaOpponenta;
         private System.Windows.Forms.Label StavkaPlayer;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
