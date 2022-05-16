@@ -61,9 +61,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.PlayerStavka = new System.Windows.Forms.Label();
-            this.OpponentStavka = new System.Windows.Forms.Label();
             this.StavkaError = new System.Windows.Forms.TextBox();
             this.NextBut = new System.Windows.Forms.Button();
+            this.labelOpponentStavka = new System.Windows.Forms.Label();
+            this.StavkaOpponenta = new System.Windows.Forms.Label();
+            this.StavkaPlayer = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Rock
@@ -432,18 +434,6 @@
             this.PlayerStavka.TabIndex = 34;
             this.PlayerStavka.Text = "Ваша ставка:";
             // 
-            // OpponentStavka
-            // 
-            this.OpponentStavka.AutoSize = true;
-            this.OpponentStavka.BackColor = System.Drawing.Color.Transparent;
-            this.OpponentStavka.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.OpponentStavka.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OpponentStavka.Location = new System.Drawing.Point(9, 123);
-            this.OpponentStavka.Name = "OpponentStavka";
-            this.OpponentStavka.Size = new System.Drawing.Size(146, 18);
-            this.OpponentStavka.TabIndex = 35;
-            this.OpponentStavka.Text = "Ставка противника:";
-            // 
             // StavkaError
             // 
             this.StavkaError.Location = new System.Drawing.Point(130, 489);
@@ -462,6 +452,43 @@
             this.NextBut.Text = "Дальше";
             this.NextBut.UseVisualStyleBackColor = true;
             this.NextBut.Visible = false;
+            this.NextBut.Click += new System.EventHandler(this.NextBut_Click);
+            // 
+            // labelOpponentStavka
+            // 
+            this.labelOpponentStavka.AutoSize = true;
+            this.labelOpponentStavka.BackColor = System.Drawing.Color.Transparent;
+            this.labelOpponentStavka.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelOpponentStavka.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelOpponentStavka.Location = new System.Drawing.Point(9, 123);
+            this.labelOpponentStavka.Name = "labelOpponentStavka";
+            this.labelOpponentStavka.Size = new System.Drawing.Size(146, 18);
+            this.labelOpponentStavka.TabIndex = 38;
+            this.labelOpponentStavka.Text = "Ставка противника:";
+            // 
+            // StavkaOpponenta
+            // 
+            this.StavkaOpponenta.AutoSize = true;
+            this.StavkaOpponenta.BackColor = System.Drawing.Color.Transparent;
+            this.StavkaOpponenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StavkaOpponenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StavkaOpponenta.Location = new System.Drawing.Point(161, 123);
+            this.StavkaOpponenta.Name = "StavkaOpponenta";
+            this.StavkaOpponenta.Size = new System.Drawing.Size(16, 18);
+            this.StavkaOpponenta.TabIndex = 39;
+            this.StavkaOpponenta.Text = "0";
+            // 
+            // StavkaPlayer
+            // 
+            this.StavkaPlayer.AutoSize = true;
+            this.StavkaPlayer.BackColor = System.Drawing.Color.Transparent;
+            this.StavkaPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StavkaPlayer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StavkaPlayer.Location = new System.Drawing.Point(14, 589);
+            this.StavkaPlayer.Name = "StavkaPlayer";
+            this.StavkaPlayer.Size = new System.Drawing.Size(16, 18);
+            this.StavkaPlayer.TabIndex = 40;
+            this.StavkaPlayer.Text = "0";
             // 
             // Form1
             // 
@@ -469,9 +496,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1185, 672);
+            this.Controls.Add(this.StavkaPlayer);
+            this.Controls.Add(this.StavkaOpponenta);
+            this.Controls.Add(this.labelOpponentStavka);
             this.Controls.Add(this.NextBut);
             this.Controls.Add(this.StavkaError);
-            this.Controls.Add(this.OpponentStavka);
             this.Controls.Add(this.PlayerStavka);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label11);
@@ -547,9 +576,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label PlayerStavka;
-        private System.Windows.Forms.Label OpponentStavka;
         private System.Windows.Forms.TextBox StavkaError;
         private System.Windows.Forms.Button NextBut;
+        private System.Windows.Forms.Label labelOpponentStavka;
+        private System.Windows.Forms.Label StavkaOpponenta;
+        private System.Windows.Forms.Label StavkaPlayer;
     }
 }
 

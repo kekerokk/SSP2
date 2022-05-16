@@ -12,7 +12,7 @@ namespace SSP2
 {
     public partial class Form1 : Form
     {
-        private int check = 1, stavka = 100, round;
+        private int check = 1, stavka = 100, round,PlayerWins,OpponentWins;
         private bool On = false;
         Random rand = new Random();
 
@@ -27,7 +27,6 @@ namespace SSP2
         private void Form1_Enter(object sender, EventArgs e)
         {
             NickName.Text = StaticData.Nick;
-            EventManager.OnChoosedSSP += ChooseSSP;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -39,11 +38,12 @@ namespace SSP2
                 Stavka.ReadOnly = false;
                 Stavka.Enabled = false;
                 PlayerPoints.Text = Convert.ToString(Convert.ToInt32(PlayerPoints.Text) - stavka);
-                PlayerStavka.Text = $"{PlayerStavka.Text}{stavka}";
+                StavkaPlayer.Text = $"{stavka}";
                 OpponentPoints.Text = Convert.ToString(Convert.ToInt32(OpponentPoints.Text) - stavka);
-                OpponentStavka.Text = $"{OpponentStavka.Text}{stavka}";
-                Onn();
+                StavkaOpponenta.Text = $"{stavka}";
+                OnnEnable();
                 button7.Enabled = false;
+                check++;
             }
             else
             {
@@ -51,17 +51,20 @@ namespace SSP2
                 
                 int PP = Convert.ToInt32(PlayerPoints.Text);
                 int OP = Convert.ToInt32(OpponentPoints.Text);
+
                 if (stavka >= PP / 100 * 20 && stavka <= PP / 100 * 50)
                 {
-                    PlayerStavka.Text = $"{PlayerStavka.Text}{stavka}";
+                    StavkaPlayer.Text = $"{stavka}";
                     PlayerPoints.Text = Convert.ToString(Convert.ToInt32(PlayerPoints.Text) - stavka);
                     Stavka.ReadOnly = false;
                     Stavka.Enabled = false;
                     // ИИ противника
-                    OpponentStavka.Text = Convert.ToString(rand.Next(OP / 100 * 20, OP / 100 * 50));
-                    OpponentPoints.Text = Convert.ToString(Convert.ToInt32(OpponentPoints) - Convert.ToInt32(OpponentStavka));
+                    StavkaOpponenta.Text = Convert.ToString(rand.Next(OP / 100 * 20, OP / 100 * 50));
+                    OpponentPoints.Text = Convert.ToString(Convert.ToInt32(OpponentPoints.Text) - Convert.ToInt32(StavkaOpponenta.Text));
                     button7.Enabled = false;
-                    Onn();
+                    check++;
+                    OnnEnable();
+                    MiddleText.Text = "VS";
                 }
                 else
                 {
@@ -74,7 +77,7 @@ namespace SSP2
         {
             int BotChoose;
             BotChoose = rand.Next(1, 3);
-            if(Choose == 1 && BotChoose == 1)
+            if(Choose == 1 && BotChoose == 1) //ничья камни
             {
                 Scissors.Visible = false;
                 Paper.Visible = false;
@@ -84,38 +87,170 @@ namespace SSP2
                 button6.Enabled = false;
                 Draw();
             }
+            if (Choose == 2 && BotChoose == 2) //ничья ножницы
+            {
+                Rock.Visible = false;
+                Paper.Visible = false;
+                button4.Visible = false;
+                button6.Visible = false;
+                Scissors.Enabled = false;
+                button5.Enabled = false;
+                Draw();
+            }
+            if (Choose == 3 && BotChoose == 3) //ничья бумага
+            {
+                Scissors.Visible = false;
+                Rock.Visible = false;
+
+                button6.Visible = false;
+                button5.Visible = false;
+
+                Paper.Enabled = false;
+                button4.Enabled = false;
+                Draw();
+            }
+
+            if (Choose == 1 && BotChoose == 2) // Камень и ножницы
+            {
+                Scissors.Visible = false;
+                Paper.Visible = false;
+
+                button6.Visible = false;
+                button4.Visible = false;
+
+                Rock.Enabled = false;
+                button4.Enabled = false;
+                PlayerWin();
+            }
+            if (Choose == 2 && BotChoose == 3) // ножницы и бумага
+            {
+                Rock.Visible = false;
+                Paper.Visible = false;
+
+                button6.Visible = false;
+                button5.Visible = false;
+
+                Scissors.Enabled = false;
+                button5.Enabled = false;
+                PlayerWin();
+            }
+            if (Choose == 3 && BotChoose == 1) // бумага и камень
+            {
+                Scissors.Visible = false;
+                Rock.Visible = false;
+
+                button5.Visible = false;
+                button4.Visible = false;
+
+                Paper.Enabled = false;
+                button6.Enabled = false;
+                PlayerWin();
+            }
+
+            if (Choose == 1 && BotChoose == 3) // Камень и бумага
+            {
+                Scissors.Visible = false;
+                Paper.Visible = false;
+
+                button5.Visible = false;
+                button6.Visible = false;
+
+                Rock.Enabled = false;
+                button4.Enabled = false;
+                PlayerLose();
+            }
+            if (Choose == 2 && BotChoose == 1) // ножницы и камень
+            {
+                Rock.Visible = false;
+                Paper.Visible = false;
+
+                button5.Visible = false;
+                button4.Visible = false;
+
+                Scissors.Enabled = false;
+                button6.Enabled = false;
+                PlayerLose();
+            }
+            if (Choose == 3 && BotChoose == 2) // бумага и ножницы
+            {
+                Scissors.Visible = false;
+                Rock.Visible = false;
+
+                button4.Visible = false;
+                button6.Visible = false;
+
+                Paper.Enabled = false;
+                button5.Enabled = false;
+                PlayerLose();
+            }
+
+            return;
         }
 
         private void Draw()
         {
             MiddleText.Text = "Ничья!";
-            Rounds.Text = $"{Convert.ToInt16(Rounds.Text) + 1}";
             labelStavka.Text = "Введите ставку:";
 
             PlayerPoints.Text = $"{Convert.ToInt16(PlayerPoints.Text) + stavka}";
-            PlayerStavka.Text = $"0";
+            stavka = 0;
+            StavkaPlayer.Text = $"0";
 
-            OpponentPoints.Text = $"{Convert.ToInt16(OpponentPoints.Text) + Convert.ToInt16(OpponentStavka.Text)}";
-            OpponentStavka.Text = "0";
+            OpponentPoints.Text = $"{Convert.ToInt32(OpponentPoints.Text) + Convert.ToInt32(StavkaOpponenta.Text)}";
+            StavkaOpponenta.Text = "0";
+            NextBut.Visible = true;
+        }
+        private void PlayerLose()
+        {
+            OpponentWins++;
+            MiddleText.Text = "Проигрышь...";
+            labelStavka.Text = "Введите ставку:";
+
+            PlayerPoints.Text = $"{Convert.ToInt16(PlayerPoints.Text) - stavka}";
+            StavkaPlayer.Text= $"0";
+
+            OpponentPoints.Text = $"{Convert.ToInt16(OpponentPoints.Text) + stavka + Convert.ToInt16(StavkaOpponenta.Text)}";
+            StavkaOpponenta.Text = "0";
+            NextBut.Visible = true;
+        }
+        private void PlayerWin()
+        {
+            PlayerWins++;
+            MiddleText.Text = "Победа!";
+            labelStavka.Text = "Введите ставку:";
+
+            PlayerPoints.Text = $"{Convert.ToInt16(PlayerPoints.Text) + stavka + Convert.ToInt16(StavkaOpponenta.Text)}";
+            StavkaPlayer.Text = $"0";
+
+            OpponentPoints.Text = $"{Convert.ToInt32(OpponentPoints.Text) - Convert.ToInt32(StavkaOpponenta.Text)}";
+            StavkaOpponenta.Text = "0";
             NextBut.Visible = true;
         }
 
         private void Rock_Click(object sender, EventArgs e)
         {
-            EventManager.OnChoosedSSP?.Invoke(1);
+            ChooseSSP(1);
         }
-
         private void Scissors_Click(object sender, EventArgs e)
         {
-            EventManager.OnChoosedSSP?.Invoke(2);
+            ChooseSSP(2);
         }
-
         private void Paper_Click(object sender, EventArgs e)
         {
-            EventManager.OnChoosedSSP?.Invoke(3);
+            ChooseSSP(3);
         }
 
-        private void Onn()
+        private void NextBut_Click(object sender, EventArgs e)
+        {
+            NextBut.Visible = false;
+            OnnVisible();
+            OffEnable();
+            MiddleText.Text = "Делайте ставку...";
+            button7.Enabled = true;
+            Stavka.Enabled = true;
+        }
+
+        private void OnnVisible()
         {
                 Rock.Visible = true;
                 Scissors.Visible = true;
@@ -123,15 +258,18 @@ namespace SSP2
                 button4.Visible = true;
                 button5.Visible = true;
                 button6.Visible = true;
-                Rock.Enabled = true;
-                Scissors.Enabled = true;
-                Paper.Enabled = true;
-                button4.Enabled = true;
-                button5.Enabled = true;
-                button6.Enabled = true;
 
         }
-        private void Off()
+        private void OnnEnable()
+        {
+            Rock.Enabled = true;
+            Scissors.Enabled = true;
+            Paper.Enabled = true;
+            button4.Enabled = true;
+            button5.Enabled = true;
+            button6.Enabled = true;
+        }
+        private void OffVisible()
         {
             Rock.Visible = false;
             Scissors.Visible = false;
@@ -139,6 +277,9 @@ namespace SSP2
             button4.Visible = false;
             button5.Visible = false;
             button6.Visible = false;
+        }
+        private void OffEnable()
+        {
             Rock.Enabled = false;
             Scissors.Enabled = false;
             Paper.Enabled = false;
