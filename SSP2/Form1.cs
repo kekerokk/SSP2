@@ -12,40 +12,51 @@ namespace SSP2
 {
     public partial class Form1 : Form
     {
-        private int check = 1, stavka = 100, round = 1,PlayerWins,OpponentWins,PlayerRoundsWins,OpponentRoundsWins;
+        /*private int check = 1, stavka = 100, round = 1,PlayerWins,OpponentWins,PlayerRoundsWins,OpponentRoundsWins;
         private bool On = false;
         private double Bonus;
-        Random rand = new Random();
+        Random rand = new Random();*/
+        private Controller __controller;
 
-        public Form1()
+        public Form1(Controller controller)
         {
             InitializeComponent();
             Form F2 = new Form2();
             F2.Show(this);
+            __controller = controller;
         }
-        LeaderBoard LB = new LeaderBoard();
+        //LeaderBoard LB = new LeaderBoard();
 
         private void Form1_Enter(object sender, EventArgs e)
         {
             NickName.Text = StaticData.Nick;
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        public void DoStavky(int playerStavka,int opponentStavka,int opponentPoints,int playerPoints)
         {
-            if (check == 1)
-            {
-                stavka = 200;
-                Stavka.Text = "200";
-                Stavka.ReadOnly = false;
-                Stavka.Enabled = false;
-                PlayerPoints.Text = Convert.ToString(Convert.ToInt32(PlayerPoints.Text) - stavka);
-                StavkaPlayer.Text = $"{stavka}";
-                OpponentPoints.Text = Convert.ToString(Convert.ToInt32(OpponentPoints.Text) - stavka);
-                StavkaOpponenta.Text = $"{stavka}";
-                OnnEnable();
-                button7.Enabled = false;
-                check++;
-            }
+            Stavka.Text = $"{Convert.ToString(playerStavka)}";
+            Stavka.ReadOnly = false;
+            Stavka.Enabled = false;
+            PlayerPoints.Text = Convert.ToString(playerPoints - playerStavka);
+            StavkaPlayer.Text = $"{playerStavka}";
+            OpponentPoints.Text = Convert.ToString(opponentPoints - opponentStavka);
+            StavkaOpponenta.Text = $"{opponentStavka}";
+            OnnEnable();
+            button7.Enabled = false;
+            MiddleText.Text = "VS";
+        }
+        public void ErrorStavka(int minStavka,int maxStavka)
+        {
+            StavkaError.Text = $"Ваша ставка слишком большая или маленькая.\nМинимальная:{minStavka}\nМаксимальная:{maxStavka}";
+        }
+
+        public void button7_Click(object sender, EventArgs e)
+        {
+            int playerStavka = Convert.ToInt32(PlayerStavka.Text);
+            int playerPoints = Convert.ToInt32(PlayerPoints.Text);
+            int opponentPoints = Convert.ToInt32(OpponentPoints.Text);
+            __controller.stavkaDoes(playerStavka,playerPoints,opponentPoints);
+
             else
             {
                 stavka = Convert.ToInt32(Stavka.Text);
@@ -386,6 +397,11 @@ namespace SSP2
                 if (Bonus > 0.5f)
                     Bonus = 0.5;
             }
+        }
+
+        private void StavkaDoes(object sender, EventArgs e)
+        {
+
         }
     }
 }

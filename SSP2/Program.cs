@@ -16,7 +16,12 @@ namespace SSP2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.Run(new Form1());
+
+            Model.Model _model = new Model.Model();
+            Controller controller = new Controller(_model);
+            Form1 form1 = new Form1(controller);
+            _model.OnStavkaDoes += form1.DoStavky;
         }
     }
 }
