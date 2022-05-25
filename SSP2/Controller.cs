@@ -20,5 +20,25 @@ namespace SSP2
         {
             __model.StavkaDoes(playerStavka, playerPoints, opponentPoints);
         }
+        internal void sspchoosen(int choosen)
+        {
+            __model.SSPChoosen(choosen);
+        }
+        internal void errorstavka()
+        {
+            __model.ErrorStavka();
+        }
+        internal void result(string middleText)
+        {
+            __model.Result(middleText);
+        }
+        internal int minstavka()
+        {
+            return __model.minStavka();
+        }
+        internal int maxstavka()
+        {
+            return __model.maxStavka();
+        }
     }
 }

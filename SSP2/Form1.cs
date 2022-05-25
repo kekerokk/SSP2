@@ -12,10 +12,6 @@ namespace SSP2
 {
     public partial class Form1 : Form
     {
-        /*private int check = 1, stavka = 100, round = 1,PlayerWins,OpponentWins,PlayerRoundsWins,OpponentRoundsWins;
-        private bool On = false;
-        private double Bonus;
-        Random rand = new Random();*/
         private Controller __controller;
 
         public Form1(Controller controller)
@@ -52,44 +48,15 @@ namespace SSP2
 
         public void button7_Click(object sender, EventArgs e)
         {
-            int playerStavka = Convert.ToInt32(PlayerStavka.Text);
+            int playerStavka = Convert.ToInt32(Stavka.Text);
             int playerPoints = Convert.ToInt32(PlayerPoints.Text);
             int opponentPoints = Convert.ToInt32(OpponentPoints.Text);
             __controller.stavkaDoes(playerStavka,playerPoints,opponentPoints);
-
-            else
-            {
-                stavka = Convert.ToInt32(Stavka.Text);
-                
-                int PP = Convert.ToInt32(PlayerPoints.Text);
-                int OP = Convert.ToInt32(OpponentPoints.Text);
-
-                if (stavka >= PP / 100 * 20 && stavka <= PP / 100 * 40)
-                {
-                    StavkaPlayer.Text = $"{stavka}";
-                    PlayerPoints.Text = Convert.ToString(Convert.ToInt32(PlayerPoints.Text) - stavka);
-                    Stavka.ReadOnly = false;
-                    Stavka.Enabled = false;
-                    // ИИ противника
-                    StavkaOpponenta.Text = Convert.ToString(rand.Next(OP / 100 * 20, OP / 100 * 40));
-                    OpponentPoints.Text = Convert.ToString(Convert.ToInt32(OpponentPoints.Text) - Convert.ToInt32(StavkaOpponenta.Text));
-                    button7.Enabled = false;
-                    check++;
-                    OnnEnable();
-                    MiddleText.Text = "VS";
-                }
-                else
-                {
-                    StavkaError.Text = $"Ваша ставка слишком большая или маленькая.\nМинимальная:{PP/100*20}\nМаксимальная:{PP/100*40}";
-                }
-            }
         }
 
-        public void ChooseSSP(int Choose)
+        public void ChooseSSP(int Choose, int BotChoose)
         {
-            int BotChoose;
-            BotChoose = rand.Next(1, 3);
-            if(Choose == 1 && BotChoose == 1) //ничья камни
+            if (Choose == 1 && BotChoose == 1) //ничья камни
             {
                 Scissors.Visible = false;
                 Paper.Visible = false;
@@ -97,7 +64,7 @@ namespace SSP2
                 button5.Visible = false;
                 Rock.Enabled = false;
                 button6.Enabled = false;
-                Draw();
+                __controller.result("Ничья!");
             }
             if (Choose == 2 && BotChoose == 2) //ничья ножницы
             {
@@ -107,7 +74,7 @@ namespace SSP2
                 button6.Visible = false;
                 Scissors.Enabled = false;
                 button5.Enabled = false;
-                Draw();
+                __controller.result("Ничья!");
             }
             if (Choose == 3 && BotChoose == 3) //ничья бумага
             {
@@ -119,7 +86,7 @@ namespace SSP2
 
                 Paper.Enabled = false;
                 button4.Enabled = false;
-                Draw();
+                __controller.result("Ничья!");
             }
 
             if (Choose == 1 && BotChoose == 2) // Камень и ножницы
@@ -132,7 +99,7 @@ namespace SSP2
 
                 Rock.Enabled = false;
                 button4.Enabled = false;
-                PlayerWin();
+                __controller.result("Выигрышь!");
             }
             if (Choose == 2 && BotChoose == 3) // ножницы и бумага
             {
@@ -144,7 +111,7 @@ namespace SSP2
 
                 Scissors.Enabled = false;
                 button5.Enabled = false;
-                PlayerWin();
+                __controller.result("Выигрышь!");
             }
             if (Choose == 3 && BotChoose == 1) // бумага и камень
             {
@@ -156,7 +123,7 @@ namespace SSP2
 
                 Paper.Enabled = false;
                 button6.Enabled = false;
-                PlayerWin();
+                __controller.result("Выигрышь!");
             }
 
             if (Choose == 1 && BotChoose == 3) // Камень и бумага
@@ -169,7 +136,7 @@ namespace SSP2
 
                 Rock.Enabled = false;
                 button4.Enabled = false;
-                PlayerLose();
+                __controller.result("Проигрышь!");
             }
             if (Choose == 2 && BotChoose == 1) // ножницы и камень
             {
@@ -181,7 +148,7 @@ namespace SSP2
 
                 Scissors.Enabled = false;
                 button6.Enabled = false;
-                PlayerLose();
+                __controller.result("Проигрышь!");
             }
             if (Choose == 3 && BotChoose == 2) // бумага и ножницы
             {
@@ -193,83 +160,51 @@ namespace SSP2
 
                 Paper.Enabled = false;
                 button5.Enabled = false;
-                PlayerLose();
+                __controller.result("Проигрышь!");
             }
 
             return;
         }
 
-        private void Draw()
+        public void Result(int playerStavka,int opponentStavka,int playerPoints, int opponentPoints, string middleText,int PlayerWins,int OpponentWins)
         {
-            MiddleText.Text = "Ничья!";
+            MiddleText.Text = middleText;
             labelStavka.Text = "Введите ставку:";
 
-            PlayerPoints.Text = $"{Convert.ToInt16(PlayerPoints.Text) + stavka}";
-            stavka = 0;
-            StavkaPlayer.Text = $"0";
+            PlayerPoints.Text = Convert.ToString(playerPoints);
+            StavkaPlayer.Text = Convert.ToString(playerStavka);
+            Stavka.Text = Convert.ToString(playerStavka);
 
-            OpponentPoints.Text = $"{Convert.ToInt32(OpponentPoints.Text) + Convert.ToInt32(StavkaOpponenta.Text)}";
-            StavkaOpponenta.Text = "0";
-            NextBut.Visible = true;
-        }
-        private void PlayerLose()
-        {
-            OpponentWins++;
+            OpponentPoints.Text = Convert.ToString(opponentPoints);
+            StavkaOpponenta.Text = Convert.ToString(opponentStavka);
+
             OpponentScore.Text = Convert.ToString(OpponentWins);
-            MiddleText.Text = "Проигрышь...";
-
-            StavkaPlayer.Text= $"0";
-
-            OpponentPoints.Text = $"{Convert.ToInt16(OpponentPoints.Text) + (stavka + Convert.ToInt16(StavkaOpponenta.Text)) * (1 + Bonus)}";
-            StavkaOpponenta.Text = "0";
-            if (PlayerWins == 3 || OpponentWins == 3)
-                FinishRound();
-            else
-                NextBut.Visible = true;
-        }
-        private void PlayerWin()
-        {
-            int SP = Convert.ToInt32(PlayerStavka.Text);
-            int SO = Convert.ToInt32(StavkaOpponenta.Text);
-            PlayerWins++;
-            CheckStavok();
             PlayerScore.Text = Convert.ToString(PlayerWins);
-            MiddleText.Text = "Победа!";
 
-            if(SP>SO)
-                PlayerPoints.Text = $"{Convert.ToInt16(PlayerPoints.Text) + (stavka + Convert.ToInt16(StavkaOpponenta.Text))*(1+Bonus)}";
-            StavkaPlayer.Text = $"0";
-
-            StavkaOpponenta.Text = "0";
-            if(PlayerWins == 3 || OpponentWins == 3)
-                FinishRound();
-            else
-                NextBut.Visible = true;
+            NextBut.Visible = true;
         }
 
         private void Rock_Click(object sender, EventArgs e)
         {
-            ChooseSSP(1);
+            __controller.sspchoosen(1);
         }
         private void Scissors_Click(object sender, EventArgs e)
         {
-            ChooseSSP(2);
+            __controller.sspchoosen(2);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(check>1)
-                Stavka.Text = Convert.ToString(Convert.ToInt32(PlayerPoints.Text) / 100 * 20);
+            Stavka.Text = $"{__controller.maxstavka()}";
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            if(check>1)
-                Stavka.Text = Convert.ToString(Convert.ToInt32(PlayerPoints.Text) / 100 * 40);
+            Stavka.Text = $"{__controller.minstavka()}";
         }
 
         private void Paper_Click(object sender, EventArgs e)
         {
-            ChooseSSP(3);
+            __controller.sspchoosen(3);
         }
 
         private void NextBut_Click(object sender, EventArgs e)
@@ -322,24 +257,19 @@ namespace SSP2
             button6.Enabled = false;
         }
 
-        private void FinishRound()
+        public void FinishRound(int RoundsWins, string middleText,string playerOropponent)
         {
-            if (PlayerWins > OpponentWins)
+            if (playerOropponent == "player")
             {
-                MiddleText.Text = $"В {round} раунде побеждает {StaticData.Nick}!";
-                check = 1;
-                round++;
-                PlayerRoundsWins++;
+                MiddleText.Text = $"{middleText}";
                 PlayerScore.Text = "0";
                 OpponentScore.Text = "0";
-                PlayerWins = 0;
-                OpponentWins = 0;
 
-                if (PlayerRoundsWins == 1)
+                if (RoundsWins == 1)
                     PlayerSumPointsRound1.Text = PlayerPoints.Text;
-                else if (PlayerRoundsWins == 2)
+                else if (RoundsWins == 2)
                     PlayerSumPointsRound2.Text = PlayerPoints.Text;
-                else if (PlayerRoundsWins == 3)
+                else if (RoundsWins == 3)
                 {
                     PlayerSumPointsRound3.Text = PlayerPoints.Text;
                     MiddleText.Text = $"Поздравляем, вы выиграли игру!\nВаш суммарный счет:{Convert.ToInt32(PlayerSumPointsRound1.Text) + Convert.ToInt32(PlayerSumPointsRound2.Text) + Convert.ToInt32(PlayerSumPointsRound3.Text)}";
@@ -355,20 +285,15 @@ namespace SSP2
             }
             else
             {
-                MiddleText.Text = $"В {round} раунде побеждает РООБОТ_БОТ!";
-                check = 1;
-                round++;
-                OpponentRoundsWins++;
+                MiddleText.Text = $"{middleText}";
                 PlayerScore.Text = "0";
                 OpponentScore.Text = "0";
-                PlayerWins = 0;
-                OpponentWins = 0;
 
-                if (OpponentRoundsWins == 1)
+                if (RoundsWins == 1)
                     OpponentSumPointsRound1.Text = OpponentPoints.Text;
-                else if (OpponentRoundsWins == 2)
+                else if (RoundsWins == 2)
                     OpponentSumPointsRound2.Text = OpponentPoints.Text;
-                else if (OpponentRoundsWins == 3)
+                else if (RoundsWins == 3)
                 {
                     OpponentSumPointsRound3.Text = PlayerPoints.Text;
                     MiddleText.Text = $"Увы, вы проиграли игру.\nСуммарный счет РООБОТа_БОТа:{Convert.ToInt32(OpponentSumPointsRound1.Text) + Convert.ToInt32(OpponentSumPointsRound2.Text) + Convert.ToInt32(OpponentSumPointsRound3.Text)}";
@@ -383,22 +308,6 @@ namespace SSP2
                 NextBut.Visible = true;
             }
         }
-
-        private void CheckStavok()
-        {
-            if(PlayerStavka.Text != StavkaOpponenta.Text)
-            {
-                int SP = Convert.ToInt16(PlayerStavka.Text);
-                int SO = Convert.ToInt16(StavkaOpponenta.Text);
-                if (SP > SO)
-                    Bonus = SO / SP;
-                else
-                    Bonus = SP / SO;
-                if (Bonus > 0.5f)
-                    Bonus = 0.5;
-            }
-        }
-
         private void StavkaDoes(object sender, EventArgs e)
         {
 

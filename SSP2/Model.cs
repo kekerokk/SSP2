@@ -9,10 +9,12 @@ namespace SSP2.Model
     public class Model
     {
         public Action<int,int,int,int> OnStavkaDoes;
+        public Action<int, int> OnSSPChoosen;
+        public Action<int, int> OnErrorStavka;
+        public Action<int, int, int, int, string,int,int> OnResult;
+        public Action<int, string, string> OnFinishedChecks;
 
         private int check = 1, round = 1, PlayerWins, OpponentWins, PlayerRoundsWins, OpponentRoundsWins, PlayerPoints,OpponentPoints,PlayerStavka,OpponentStavka;
-        private bool On = false;
-        private double Bonus;
         Random rand = new Random();
 
 
@@ -25,36 +27,107 @@ namespace SSP2.Model
             {
                 PlayerStavka = 200;
                 OpponentStavka = 200;
+                PlayerPoints -= PlayerStavka;
+                OpponentRoundsWins -= OpponentStavka;
                 
                 check++;
                 OnStavkaDoes?.Invoke(PlayerStavka, OpponentStavka, PlayerPoints, OpponentPoints);
             }
             else
             {
-                stavka = Convert.ToInt32(Stavka.Text);
-
-                int PP = Convert.ToInt32(PlayerPoints.Text);
-                int OP = Convert.ToInt32(OpponentPoints.Text);
-
-                if (stavka >= PP / 100 * 20 && stavka <= PP / 100 * 40)
+                if (PlayerStavka >= PlayerPoints / 100 * 20 && PlayerStavka <= PlayerStavka / 100 * 40)
                 {
-                    StavkaPlayer.Text = $"{stavka}";
-                    PlayerPoints.Text = Convert.ToString(Convert.ToInt32(PlayerPoints.Text) - stavka);
-                    Stavka.ReadOnly = false;
-                    Stavka.Enabled = false;
-                    // ИИ противника
-                    StavkaOpponenta.Text = Convert.ToString(rand.Next(OP / 100 * 20, OP / 100 * 40));
-                    OpponentPoints.Text = Convert.ToString(Convert.ToInt32(OpponentPoints.Text) - Convert.ToInt32(StavkaOpponenta.Text));
-                    button7.Enabled = false;
-                    check++;
-                    OnnEnable();
-                    MiddleText.Text = "VS";
+                    PlayerStavka = playerStavka;
+                    PlayerPoints = playerPoints;
+                    OpponentPoints = opponentPoints;
+                    OpponentStavka = rand.Next(OpponentPoints / 100 * 20, OpponentPoints / 100 * 40);
+
+                    PlayerPoints -= PlayerStavka;
+                    OpponentRoundsWins -= OpponentStavka;
+
+                    OnStavkaDoes?.Invoke(PlayerStavka, OpponentStavka, PlayerPoints, OpponentPoints);
                 }
                 else
                 {
-                    StavkaError.Text = $"Ваша ставка слишком большая или маленькая.\nМинимальная:{PP / 100 * 20}\nМаксимальная:{PP / 100 * 40}";
+                    OnErrorStavka?.Invoke(PlayerPoints / 100 * 20, PlayerPoints / 100 * 40);
                 }
             }
+        }
+        public void SSPChoosen(int Choosen)
+        {
+            int BotChoose;
+            BotChoose = rand.Next(1, 3);
+            OnSSPChoosen?.Invoke(Choosen, BotChoose);
+        }
+        public void ErrorStavka()
+        {
+            int min = PlayerPoints / 100 * 20;
+            int max = PlayerPoints / 100 * 40;
+            OnErrorStavka?.Invoke(min, max);
+        }
+        public void Result(string middleText)
+        {
+            if (middleText == "Ничья!")
+            {
+                PlayerPoints += PlayerStavka;
+                PlayerStavka = 0;
+                OpponentPoints += OpponentStavka;
+                OpponentStavka = 0;
+            }
+            if (middleText == "Выигрышь!")
+            {
+                PlayerPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                PlayerWins++;
+            }
+            if (middleText == "Проигрышь!")
+            {
+                OpponentPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                OpponentWins++;
+            }
+            
+            if(PlayerWins == 3 || OpponentWins == 3)
+            {
+                if (PlayerWins > OpponentWins)
+                {
+                    middleText = $"В {round} раунде побеждает {StaticData.Nick}!";
+                    check = 1;
+                    round++;
+                    PlayerRoundsWins++;
+                    PlayerWins = 0;
+                    OpponentWins = 0;
+                    OpponentPoints = 1000;
+                    PlayerPoints = 1000;
+
+                    OnFinishedChecks?.Invoke(PlayerRoundsWins,middleText,"player");
+                }
+                else
+                {
+                    middleText = $"В {round} раунде побеждает Оппонент!";
+                    check = 1;
+                    round++;
+                    OpponentRoundsWins++;
+                    PlayerWins = 0;
+                    OpponentWins = 0;
+                    OpponentPoints = 1000;
+                    PlayerPoints = 1000;
+
+                    OnFinishedChecks?.Invoke(PlayerRoundsWins, middleText,"opponent");
+                }
+            }
+            else
+                OnResult?.Invoke(PlayerStavka,OpponentStavka,PlayerPoints,OpponentPoints,middleText,PlayerWins,OpponentWins);
+        }
+        public int minStavka()
+        {
+            return PlayerStavka / 100 * 20;
+        }
+        public int maxStavka()
+        {
+            return PlayerPoints / 100 * 40;
         }
     }
 }

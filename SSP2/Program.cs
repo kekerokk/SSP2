@@ -22,6 +22,10 @@ namespace SSP2
             Controller controller = new Controller(_model);
             Form1 form1 = new Form1(controller);
             _model.OnStavkaDoes += form1.DoStavky;
+            _model.OnErrorStavka += form1.ErrorStavka;
+            _model.OnSSPChoosen += form1.ChooseSSP;
+            _model.OnErrorStavka += form1.ErrorStavka;
+            _model.OnResult += form1.Result;
         }
     }
 }
