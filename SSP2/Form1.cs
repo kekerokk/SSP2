@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SSP2
@@ -35,7 +28,7 @@ namespace SSP2
             NickName.Text = StaticData.Nick;
         }
 
-        public void DoStavky(int playerStavka,int opponentStavka,int opponentPoints,int playerPoints)
+        public void DoStavky(int playerStavka, int opponentStavka, int opponentPoints, int playerPoints)
         {
             Stavka.Text = $"{Convert.ToString(playerStavka)}";
             Stavka.ReadOnly = false;
@@ -48,7 +41,7 @@ namespace SSP2
             button7.Enabled = false;
             MiddleText.Text = "VS";
         }
-        public void ErrorStavka(int minStavka,int maxStavka)
+        public void ErrorStavka(int minStavka, int maxStavka)
         {
             StavkaError.Text = $"Ваша ставка слишком большая или маленькая.\nМинимальная:{minStavka}\nМаксимальная:{maxStavka}";
         }
@@ -58,7 +51,7 @@ namespace SSP2
             int playerStavka = Convert.ToInt32(Stavka.Text);
             int playerPoints = Convert.ToInt32(PlayerPoints.Text);
             int opponentPoints = Convert.ToInt32(OpponentPoints.Text);
-            __controller.stavkaDoes(playerStavka,playerPoints,opponentPoints);
+            __controller.stavkaDoes(playerStavka, playerPoints, opponentPoints);
         }
 
         public void ChooseSSP(int Choose, int BotChoose)
@@ -173,7 +166,7 @@ namespace SSP2
             return;
         }
 
-        public void Result(int playerStavka,int opponentStavka,int playerPoints, int opponentPoints, string middleText,int PlayerWins,int OpponentWins)
+        public void Result(int playerStavka, int opponentStavka, int playerPoints, int opponentPoints, string middleText, int PlayerWins, int OpponentWins)
         {
             MiddleText.Text = middleText;
             labelStavka.Text = "Введите ставку:";
@@ -217,23 +210,23 @@ namespace SSP2
         private void NextBut_Click(object sender, EventArgs e)
         {
             NextBut.Text = "Следующая разыгровка";
-                labelStavka.Text = "Введите ставку:";
-                NextBut.Visible = false;
-                OnnVisible();
-                OffEnable();
-                MiddleText.Text = "Делайте ставку...";
-                button7.Enabled = true;
-                Stavka.Enabled = true;
+            labelStavka.Text = "Введите ставку:";
+            NextBut.Visible = false;
+            OnnVisible();
+            OffEnable();
+            MiddleText.Text = "Делайте ставку...";
+            button7.Enabled = true;
+            Stavka.Enabled = true;
         }
 
         private void OnnVisible()
         {
-                Rock.Visible = true;
-                Scissors.Visible = true;
-                Paper.Visible = true;
-                button4.Visible = true;
-                button5.Visible = true;
-                button6.Visible = true;
+            Rock.Visible = true;
+            Scissors.Visible = true;
+            Paper.Visible = true;
+            button4.Visible = true;
+            button5.Visible = true;
+            button6.Visible = true;
 
         }
         private void OnnEnable()
@@ -264,7 +257,7 @@ namespace SSP2
             button6.Enabled = false;
         }
 
-        public void FinishRound(int RoundsWins, string middleText,string playerOropponent)
+        public void FinishRound(int RoundsWins, string middleText, string playerOropponent)
         {
             if (playerOropponent == "player")
             {

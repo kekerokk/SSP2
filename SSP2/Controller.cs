@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SSP2;
-
-namespace SSP2
+﻿namespace SSP2
 {
     public class Controller
     {
@@ -27,7 +20,7 @@ namespace SSP2
 
         internal void createUser(string text)
         {
-            __model.setUserName(text);
+            __model.SetUserName(text);
         }
 
         internal void errorstavka()

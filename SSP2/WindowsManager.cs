@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SSP2
+﻿namespace SSP2
 {
     public class WindowsManager
     {
@@ -13,12 +7,13 @@ namespace SSP2
 
         private Controller _controller;
 
-        public WindowsManager(Controller controller) {
+        public WindowsManager(Controller controller)
+        {
             _form1 = new Form1(this);
-            _form2 = new Form2(this); 
+            _form2 = new Form2(this);
             _controller = controller;
         }
-        public  void CreateUser(string text)
+        public void CreateUser(string text)
         {
             _controller.createUser(text);
         }

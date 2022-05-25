@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SSP2
@@ -29,13 +23,13 @@ namespace SSP2
         {
             this.windowsManager = windowsManager;
             InitializeComponent();
-          
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
             this.Activate();
-            Rules.Text = "Правила:\r\n1.Играется как в обычные камень-ножницы-бумага.\r\n"+
+            Rules.Text = "Правила:\r\n1.Играется как в обычные камень-ножницы-бумага.\r\n" +
                 "2.У игрока и у бота, либо у другого игрока, есть очки в количестве 1000. В каждом раунде все делают ставку: 20% от очков - минимум и 40% от очков - максимум." +
                 " Если у игроков есть разница в ставке, то у того, кто  с большей ставкой, будет дополнительный выигрышь в зависимости от разницы.\r\n" +
                 "3.Один раунд длится до 3-х побед одного игрока. В начале раунда игроки делают депозит в размере 100 очков и играют, в последующих мини-раундах могут сделать свою ставку.\r\n" +

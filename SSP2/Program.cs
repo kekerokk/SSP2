@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SSP2
@@ -16,7 +13,7 @@ namespace SSP2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+
 
             Model.Model _model = new Model.Model();
             Controller controller = new Controller(_model);

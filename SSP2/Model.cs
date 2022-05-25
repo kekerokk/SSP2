@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SSP2.Model
 {
     public class Model
     {
-        public Action<int,int,int,int> OnStavkaDoes;
+        public Action<int, int, int, int> OnStavkaDoes;
         public Action<int, int> OnSSPChoosen;
         public Action<int, int> OnErrorStavka;
-        public Action<int, int, int, int, string,int,int> OnResult;
+        public Action<int, int, int, int, string, int, int> OnResult;
         public Action<int, string, string> OnFinishedChecks;
 
-        private int check = 1, round = 1, PlayerWins, OpponentWins, PlayerRoundsWins, OpponentRoundsWins, PlayerPoints,OpponentPoints,PlayerStavka,OpponentStavka;
+        private int check = 1, round = 1, PlayerWins, OpponentWins, PlayerRoundsWins, OpponentRoundsWins, PlayerPoints, OpponentPoints, PlayerStavka, OpponentStavka;
         Random rand = new Random();
 
 
-        public void StavkaDoes(int playerStavka,int playerPoints, int opponentPoints)
+        public void StavkaDoes(int playerStavka, int playerPoints, int opponentPoints)
         {
             PlayerStavka = playerStavka;
             PlayerPoints = playerPoints;
@@ -29,7 +25,7 @@ namespace SSP2.Model
                 OpponentStavka = 200;
                 PlayerPoints -= PlayerStavka;
                 OpponentRoundsWins -= OpponentStavka;
-                
+
                 check++;
                 OnStavkaDoes?.Invoke(PlayerStavka, OpponentStavka, PlayerPoints, OpponentPoints);
             }
@@ -54,7 +50,7 @@ namespace SSP2.Model
             }
         }
 
-        internal void setUserName(string text)
+        internal void SetUserName(string text)
         {
             throw new NotImplementedException();
         }
@@ -79,7 +75,7 @@ namespace SSP2.Model
                 PlayerStavka = 0;
                 OpponentPoints += OpponentStavka;
                 OpponentStavka = 0;
-            
+
             }
             if (middleText == "Выигрышь!")
             {
@@ -95,8 +91,8 @@ namespace SSP2.Model
                 OpponentStavka = 0;
                 OpponentWins++;
             }
-            
-            if(PlayerWins == 3 || OpponentWins == 3)
+
+            if (PlayerWins == 3 || OpponentWins == 3)
             {
                 if (PlayerWins > OpponentWins)
                 {
@@ -109,7 +105,7 @@ namespace SSP2.Model
                     OpponentPoints = 1000;
                     PlayerPoints = 1000;
 
-                    OnFinishedChecks?.Invoke(PlayerRoundsWins,middleText,"player");
+                    OnFinishedChecks?.Invoke(PlayerRoundsWins, middleText, "player");
                 }
                 else
                 {
@@ -122,11 +118,11 @@ namespace SSP2.Model
                     OpponentPoints = 1000;
                     PlayerPoints = 1000;
 
-                    OnFinishedChecks?.Invoke(PlayerRoundsWins, middleText,"opponent");
+                    OnFinishedChecks?.Invoke(PlayerRoundsWins, middleText, "opponent");
                 }
             }
             else
-                OnResult?.Invoke(PlayerStavka,OpponentStavka,PlayerPoints,OpponentPoints,middleText,PlayerWins,OpponentWins);
+                OnResult?.Invoke(PlayerStavka, OpponentStavka, PlayerPoints, OpponentPoints, middleText, PlayerWins, OpponentWins);
         }
         public int minStavka()
         {
