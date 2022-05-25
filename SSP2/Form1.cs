@@ -13,6 +13,7 @@ namespace SSP2
     public partial class Form1 : Form
     {
         private Controller __controller;
+        private WindowsManager windowsManager;
 
         public Form1(Controller controller)
         {
@@ -21,6 +22,12 @@ namespace SSP2
             F2.Show(this);
             __controller = controller;
         }
+
+        public Form1(WindowsManager windowsManager)
+        {
+            this.windowsManager = windowsManager;
+        }
+
         //LeaderBoard LB = new LeaderBoard();
 
         private void Form1_Enter(object sender, EventArgs e)

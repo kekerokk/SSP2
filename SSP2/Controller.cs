@@ -24,6 +24,12 @@ namespace SSP2
         {
             __model.SSPChoosen(choosen);
         }
+
+        internal void createUser(string text)
+        {
+            __model.setUserName(text);
+        }
+
         internal void errorstavka()
         {
             __model.ErrorStavka();

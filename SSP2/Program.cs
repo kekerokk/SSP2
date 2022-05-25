@@ -16,7 +16,7 @@ namespace SSP2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            
 
             Model.Model _model = new Model.Model();
             Controller controller = new Controller(_model);
@@ -26,6 +26,7 @@ namespace SSP2
             _model.OnSSPChoosen += form1.ChooseSSP;
             _model.OnErrorStavka += form1.ErrorStavka;
             _model.OnResult += form1.Result;
+            Application.Run(form1);
         }
     }
 }

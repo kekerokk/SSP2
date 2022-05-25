@@ -12,6 +12,8 @@ namespace SSP2
 {
     public partial class Form2 : Form
     {
+        private WindowsManager windowsManager;
+
         public Form2()
         {
             InitializeComponent();
@@ -21,6 +23,13 @@ namespace SSP2
         {
             InitializeComponent();
             f.BackColor = Color.Yellow;
+        }
+
+        public Form2(WindowsManager windowsManager)
+        {
+            this.windowsManager = windowsManager;
+            InitializeComponent();
+          
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -35,8 +44,10 @@ namespace SSP2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            StaticData.Nick = textBox1.Text;
-            Application.OpenForms[0].Close();
+            //StaticData.Nick = textBox1.Text;
+            //Application.OpenForms[0].Close();
+
+            windowsManager.CreateUser(textBox1.Text);
         }
 
         public string GetName()

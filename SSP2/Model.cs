@@ -53,6 +53,12 @@ namespace SSP2.Model
                 }
             }
         }
+
+        internal void setUserName(string text)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SSPChoosen(int Choosen)
         {
             int BotChoose;
@@ -73,6 +79,7 @@ namespace SSP2.Model
                 PlayerStavka = 0;
                 OpponentPoints += OpponentStavka;
                 OpponentStavka = 0;
+            
             }
             if (middleText == "Выигрышь!")
             {
