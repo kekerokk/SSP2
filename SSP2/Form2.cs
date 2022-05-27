@@ -23,7 +23,6 @@ namespace SSP2
         {
             this.windowsManager = windowsManager;
             InitializeComponent();
-
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -39,14 +38,18 @@ namespace SSP2
         private void button1_Click(object sender, EventArgs e)
         {
             //StaticData.Nick = textBox1.Text;
-            //Application.OpenForms[0].Close();
-
             windowsManager.CreateUser(textBox1.Text);
+            Application.OpenForms[0].Close();
         }
 
         public string GetName()
         {
             return textBox1.Text;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            windowsManager.OpenTable();
         }
     }
     public static class StaticData

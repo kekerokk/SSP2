@@ -8,10 +8,12 @@ namespace SSP2.Model
         public Action<int, int> OnSSPChoosen;
         public Action<int, int> OnErrorStavka;
         public Action<int, int, int, int, string, int, int> OnResult;
-        public Action<int, string, string> OnFinishedChecks;
+        public Action<int, string, string, int, int, int> OnFinishedChecks;
 
-        private int check = 1, round = 1, PlayerWins, OpponentWins, PlayerRoundsWins, OpponentRoundsWins, PlayerPoints, OpponentPoints, PlayerStavka, OpponentStavka;
+        private int check = 1, round = 1, PlayerWins, OpponentWins, PlayerRoundsWins, OpponentRoundsWins, PlayerPoints, OpponentPoints, PlayerStavka, OpponentStavka,playerEndPoints,opponentEndPoints;
+        public string userName;
         Random rand = new Random();
+
 
 
         public void StavkaDoes(int playerStavka, int playerPoints, int opponentPoints)
@@ -24,24 +26,20 @@ namespace SSP2.Model
                 PlayerStavka = 200;
                 OpponentStavka = 200;
                 PlayerPoints -= PlayerStavka;
-                OpponentRoundsWins -= OpponentStavka;
+                OpponentPoints -= OpponentStavka;
 
-                check++;
                 OnStavkaDoes?.Invoke(PlayerStavka, OpponentStavka, PlayerPoints, OpponentPoints);
             }
             else
             {
-                if (PlayerStavka >= PlayerPoints / 100 * 20 && PlayerStavka <= PlayerStavka / 100 * 40)
+                if (PlayerStavka >= PlayerPoints / 100 * 20 && PlayerStavka <= PlayerPoints / 100 * 40)
                 {
-                    PlayerStavka = playerStavka;
-                    PlayerPoints = playerPoints;
-                    OpponentPoints = opponentPoints;
                     OpponentStavka = rand.Next(OpponentPoints / 100 * 20, OpponentPoints / 100 * 40);
 
                     PlayerPoints -= PlayerStavka;
-                    OpponentRoundsWins -= OpponentStavka;
+                    OpponentPoints -= OpponentStavka;
 
-                    OnStavkaDoes?.Invoke(PlayerStavka, OpponentStavka, PlayerPoints, OpponentPoints);
+                    OnStavkaDoes?.Invoke(PlayerStavka, OpponentStavka, OpponentPoints, PlayerPoints);
                 }
                 else
                 {
@@ -50,13 +48,14 @@ namespace SSP2.Model
             }
         }
 
-        internal void SetUserName(string text)
+        public void SetUserName(string text)
         {
-            throw new NotImplementedException();
+            userName = text;
         }
 
         public void SSPChoosen(int Choosen)
         {
+            check++;
             int BotChoose;
             BotChoose = rand.Next(1, 3);
             OnSSPChoosen?.Invoke(Choosen, BotChoose);
@@ -94,9 +93,12 @@ namespace SSP2.Model
 
             if (PlayerWins == 3 || OpponentWins == 3)
             {
+                playerEndPoints = PlayerPoints;
+                opponentEndPoints = OpponentPoints;
+
                 if (PlayerWins > OpponentWins)
                 {
-                    middleText = $"В {round} раунде побеждает {StaticData.Nick}!";
+                    middleText = $"В {round} раунде побеждает {userName}!";
                     check = 1;
                     round++;
                     PlayerRoundsWins++;
@@ -105,7 +107,7 @@ namespace SSP2.Model
                     OpponentPoints = 1000;
                     PlayerPoints = 1000;
 
-                    OnFinishedChecks?.Invoke(PlayerRoundsWins, middleText, "player");
+                    OnFinishedChecks?.Invoke(PlayerRoundsWins, middleText, "player", round, playerEndPoints,opponentEndPoints);
                 }
                 else
                 {
@@ -118,7 +120,7 @@ namespace SSP2.Model
                     OpponentPoints = 1000;
                     PlayerPoints = 1000;
 
-                    OnFinishedChecks?.Invoke(PlayerRoundsWins, middleText, "opponent");
+                    OnFinishedChecks?.Invoke(OpponentRoundsWins, middleText, "opponent", round, playerEndPoints,opponentEndPoints);
                 }
             }
             else
@@ -126,7 +128,7 @@ namespace SSP2.Model
         }
         public int minStavka()
         {
-            return PlayerStavka / 100 * 20;
+            return PlayerPoints / 100 * 20;
         }
         public int maxStavka()
         {

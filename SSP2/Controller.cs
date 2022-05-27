@@ -39,5 +39,9 @@
         {
             return __model.maxStavka();
         }
+        internal string GetNick()
+        {
+            return __model.userName;
+        }
     }
 }

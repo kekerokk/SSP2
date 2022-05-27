@@ -2,20 +2,24 @@
 {
     public class WindowsManager
     {
-        private Form1 _form1;
-        private Form2 _form2;
+        public Form1 _form1;
+        public Form2 _form2;
 
         private Controller _controller;
 
         public WindowsManager(Controller controller)
-        {
-            _form1 = new Form1(this);
-            _form2 = new Form2(this);
+        {   
             _controller = controller;
         }
         public void CreateUser(string text)
         {
             _controller.createUser(text);
+        }
+        public void OpenTable()
+        {
+            Form3 form3 = new Form3();
+            form3.Show();
+            form3.Activate();
         }
     }
 }

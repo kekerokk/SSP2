@@ -177,7 +177,7 @@
             this.button7.TabIndex = 9;
             this.button7.Text = "Сделать ставку";
             this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.StavkaDoes);
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Stavka
             // 
@@ -495,6 +495,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(12, 515);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(50, 23);
@@ -505,6 +506,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(73, 515);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(50, 23);

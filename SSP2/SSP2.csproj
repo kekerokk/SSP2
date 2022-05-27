@@ -58,6 +58,21 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="EventManager.cs" />
+    <Compile Include="FixedLeaderBoard.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixedLeaderBoard.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FixedLeaderBoard.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixedLeaderBoard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FixedLeaderBoard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixedLeaderBoard.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +84,12 @@
     </Compile>
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
     <Compile Include="GameResult.cs" />
     <Compile Include="LeaderBoard.Context.cs">
@@ -104,15 +125,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LeaderBord.edmx</DependentUpon>
     </Compile>
+    <Compile Include="LeaderTable.cs">
+      <DependentUpon>FixedLeaderBoard.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SPPDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPPDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WindowsManager.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -132,6 +164,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LeaderBoard.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="FixedLeaderBoard.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FixedLeaderBoard.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="FixedLeaderBoard.edmx.diagram">
+      <DependentUpon>FixedLeaderBoard.edmx</DependentUpon>
+    </None>
     <None Include="LeaderBoard.edmx.diagram">
       <DependentUpon>LeaderBoard.edmx</DependentUpon>
     </None>
@@ -148,11 +187,32 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SPPDBDataSet.xsc">
+      <DependentUpon>SPPDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SPPDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SPPDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SPPDBDataSet.xss">
+      <DependentUpon>SPPDBDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FixedLeaderBoard.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FixedLeaderBoard.edmx</DependentUpon>
+      <LastGenOutput>FixedLeaderBoard.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="FixedLeaderBoard.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FixedLeaderBoard.edmx</DependentUpon>
+      <LastGenOutput>FixedLeaderBoard.cs</LastGenOutput>
+    </Content>
     <Content Include="LeaderBoard.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LeaderBoard.edmx</DependentUpon>

@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Windows.Forms;
+using SSP2;
 
 namespace SSP2
 {
     public partial class Form1 : Form
     {
         private Controller __controller;
-        private WindowsManager windowsManager;
+        private WindowsManager _windowsManager;
 
-        public Form1(Controller controller)
+        public Form1(Controller controller, WindowsManager windowsManager)
         {
             InitializeComponent();
-            Form F2 = new Form2();
+            Form F2 = new Form2(windowsManager);
             F2.Show(this);
             __controller = controller;
+            windowsManager._form1 = this;
         }
 
         public Form1(WindowsManager windowsManager)
         {
-            this.windowsManager = windowsManager;
+            this._windowsManager = windowsManager;
         }
-
-        //LeaderBoard LB = new LeaderBoard();
 
         private void Form1_Enter(object sender, EventArgs e)
         {
-            NickName.Text = StaticData.Nick;
+            NickName.Text = Convert.ToString($"{__controller.GetNick()}");
         }
 
         public void DoStavky(int playerStavka, int opponentStavka, int opponentPoints, int playerPoints)
@@ -33,9 +33,9 @@ namespace SSP2
             Stavka.Text = $"{Convert.ToString(playerStavka)}";
             Stavka.ReadOnly = false;
             Stavka.Enabled = false;
-            PlayerPoints.Text = Convert.ToString(playerPoints - playerStavka);
+            PlayerPoints.Text = Convert.ToString(playerPoints);
             StavkaPlayer.Text = $"{playerStavka}";
-            OpponentPoints.Text = Convert.ToString(opponentPoints - opponentStavka);
+            OpponentPoints.Text = Convert.ToString(opponentPoints);
             StavkaOpponenta.Text = $"{opponentStavka}";
             OnnEnable();
             button7.Enabled = false;
@@ -51,6 +51,7 @@ namespace SSP2
             int playerStavka = Convert.ToInt32(Stavka.Text);
             int playerPoints = Convert.ToInt32(PlayerPoints.Text);
             int opponentPoints = Convert.ToInt32(OpponentPoints.Text);
+
             __controller.stavkaDoes(playerStavka, playerPoints, opponentPoints);
         }
 
@@ -162,8 +163,6 @@ namespace SSP2
                 button5.Enabled = false;
                 __controller.result("Проигрышь!");
             }
-
-            return;
         }
 
         public void Result(int playerStavka, int opponentStavka, int playerPoints, int opponentPoints, string middleText, int PlayerWins, int OpponentWins)
@@ -195,11 +194,11 @@ namespace SSP2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Stavka.Text = $"{__controller.maxstavka()}";
+            Stavka.Text = $"{__controller.minstavka()}";
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            Stavka.Text = $"{__controller.minstavka()}";
+            Stavka.Text = $"{__controller.maxstavka()}";
         }
 
         private void Paper_Click(object sender, EventArgs e)
@@ -217,6 +216,8 @@ namespace SSP2
             MiddleText.Text = "Делайте ставку...";
             button7.Enabled = true;
             Stavka.Enabled = true;
+            button1.Enabled = true;
+            button2.Enabled = true;
         }
 
         private void OnnVisible()
@@ -257,8 +258,9 @@ namespace SSP2
             button6.Enabled = false;
         }
 
-        public void FinishRound(int RoundsWins, string middleText, string playerOropponent)
+        public void FinishRound(int RoundsWins, string middleText, string playerOropponent,int round, int playerPoints, int opponentPoints)
         {
+            Rounds.Text = $"Раунд {round}";
             if (playerOropponent == "player")
             {
                 MiddleText.Text = $"{middleText}";
@@ -266,14 +268,25 @@ namespace SSP2
                 OpponentScore.Text = "0";
 
                 if (RoundsWins == 1)
-                    PlayerSumPointsRound1.Text = PlayerPoints.Text;
+                    PlayerSumPointsRound1.Text = $"{playerPoints}";
                 else if (RoundsWins == 2)
-                    PlayerSumPointsRound2.Text = PlayerPoints.Text;
+                    PlayerSumPointsRound2.Text = $"{playerPoints}";
                 else if (RoundsWins == 3)
                 {
-                    PlayerSumPointsRound3.Text = PlayerPoints.Text;
-                    MiddleText.Text = $"Поздравляем, вы выиграли игру!\nВаш суммарный счет:{Convert.ToInt32(PlayerSumPointsRound1.Text) + Convert.ToInt32(PlayerSumPointsRound2.Text) + Convert.ToInt32(PlayerSumPointsRound3.Text)}";
+                    PlayerSumPointsRound3.Text = $"{playerPoints}";
+                    int SumPoints1 = Convert.ToInt32(PlayerSumPointsRound1.Text);
+                    int SumPoints2 = Convert.ToInt32(PlayerSumPointsRound2.Text);
+                    int SumPoints3 = Convert.ToInt32(PlayerSumPointsRound3.Text);
+                    MiddleText.Text = $"Поздравляем, вы выиграли игру!\nВаш суммарный счет:{SumPoints1 + SumPoints2 + SumPoints3}";
                     OffVisible();
+                    LeaderTable lb = new LeaderTable();
+                    lb.NickName = __controller.GetNick();
+                    lb.vsBotOrPlayer = "Bot";
+                    lb.Points = $"{SumPoints1 + SumPoints2 + SumPoints3}";
+
+                    SPPDBEntities __db = new SPPDBEntities();
+                    __db.LeaderTable.Add(lb);
+                    __db.SaveChanges();
                     return;
                 }
 
@@ -290,13 +303,16 @@ namespace SSP2
                 OpponentScore.Text = "0";
 
                 if (RoundsWins == 1)
-                    OpponentSumPointsRound1.Text = OpponentPoints.Text;
+                    OpponentSumPointsRound1.Text = $"{opponentPoints}";
                 else if (RoundsWins == 2)
-                    OpponentSumPointsRound2.Text = OpponentPoints.Text;
+                    OpponentSumPointsRound2.Text = $"{opponentPoints}";
                 else if (RoundsWins == 3)
                 {
-                    OpponentSumPointsRound3.Text = PlayerPoints.Text;
-                    MiddleText.Text = $"Увы, вы проиграли игру.\nСуммарный счет РООБОТа_БОТа:{Convert.ToInt32(OpponentSumPointsRound1.Text) + Convert.ToInt32(OpponentSumPointsRound2.Text) + Convert.ToInt32(OpponentSumPointsRound3.Text)}";
+                    OpponentSumPointsRound3.Text = $"{opponentPoints}";
+                    int sumPoints1 = Convert.ToInt16(OpponentSumPointsRound1.Text);
+                    int sumPoints2 = Convert.ToInt16(OpponentSumPointsRound2.Text);
+                    int sumPoints3 = Convert.ToInt16(OpponentSumPointsRound3.Text);
+                    MiddleText.Text = $"Увы, вы проиграли игру.\nСуммарный счет РООБОТа_БОТа:{sumPoints1 + sumPoints2 + sumPoints3}";
                     OffVisible();
                     return;
                 }
@@ -307,10 +323,6 @@ namespace SSP2
                 NextBut.Text = "Начать следующий раунд";
                 NextBut.Visible = true;
             }
-        }
-        private void StavkaDoes(object sender, EventArgs e)
-        {
-
         }
     }
 }
