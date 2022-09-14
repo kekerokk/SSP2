@@ -20,7 +20,7 @@ namespace SSP2
 
         public Form1(WindowsManager windowsManager)
         {
-            this._windowsManager = windowsManager;
+            _windowsManager = windowsManager;
         }
 
         private void Form1_Enter(object sender, EventArgs e)
@@ -205,7 +205,10 @@ namespace SSP2
         {
             __controller.sspchoosen(3);
         }
+        public void PlayerWin()
+        {
 
+        }
         private void NextBut_Click(object sender, EventArgs e)
         {
             NextBut.Text = "Следующая разыгровка";
@@ -284,9 +287,9 @@ namespace SSP2
                     lb.vsBotOrPlayer = "Bot";
                     lb.Points = $"{SumPoints1 + SumPoints2 + SumPoints3}";
 
-                    SPPDBEntities __db = new SPPDBEntities();
+                    /*SPPDBEntities __db = new SPPDBEntities();
                     __db.LeaderTable.Add(lb);
-                    __db.SaveChanges();
+                    __db.SaveChanges();*/
                     return;
                 }
 

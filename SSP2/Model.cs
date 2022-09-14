@@ -10,7 +10,7 @@ namespace SSP2.Model
         public Action<int, int, int, int, string, int, int> OnResult;
         public Action<int, string, string, int, int, int> OnFinishedChecks;
 
-        private int check = 1, round = 1, PlayerWins, OpponentWins, PlayerRoundsWins, OpponentRoundsWins, PlayerPoints, OpponentPoints, PlayerStavka, OpponentStavka,playerEndPoints,opponentEndPoints;
+        public int check = 1,choosenSSP, round = 1, PlayerWins, OpponentWins, PlayerRoundsWins, OpponentRoundsWins, PlayerPoints, OpponentPoints, PlayerStavka, OpponentStavka,playerEndPoints,opponentEndPoints;
         public string userName;
         Random rand = new Random();
 
@@ -47,6 +47,37 @@ namespace SSP2.Model
                 }
             }
         }
+        public void StavkaDoesForTest(int playerStavka, int playerPoints, int opponentPoints,int Choose, int BotChoose)
+        {
+            PlayerStavka = playerStavka;
+            PlayerPoints = playerPoints;
+            OpponentPoints = opponentPoints;
+            if (check == 1)
+            {
+                PlayerStavka = 200;
+                OpponentStavka = 200;
+                PlayerPoints -= PlayerStavka;
+                OpponentPoints -= OpponentStavka;
+
+                Result(Choose, BotChoose);
+            }
+            else
+            {
+                if (PlayerStavka >= PlayerPoints / 100 * 20 && PlayerStavka <= PlayerPoints / 100 * 40)
+                {
+                    OpponentStavka = rand.Next(OpponentPoints / 100 * 20, OpponentPoints / 100 * 40);
+
+                    PlayerPoints -= PlayerStavka;
+                    OpponentPoints -= OpponentStavka;
+
+                    
+                }
+                else
+                {
+                    
+                }
+            }
+        }
 
         public void SetUserName(string text)
         {
@@ -55,10 +86,15 @@ namespace SSP2.Model
 
         public void SSPChoosen(int Choosen)
         {
+            choosenSSP = Choosen;
             check++;
             int BotChoose;
             BotChoose = rand.Next(1, 3);
             OnSSPChoosen?.Invoke(Choosen, BotChoose);
+        }
+        public void PlayerWin()
+        {
+            
         }
         public void ErrorStavka()
         {
@@ -126,6 +162,60 @@ namespace SSP2.Model
             else
                 OnResult?.Invoke(PlayerStavka, OpponentStavka, PlayerPoints, OpponentPoints, middleText, PlayerWins, OpponentWins);
         }
+        public void Result(int Choose, int BotChoose)
+        {
+            if (Choose == BotChoose)
+            {
+                PlayerPoints += PlayerStavka;
+                PlayerStavka = 0;
+                OpponentPoints += OpponentStavka;
+                OpponentStavka = 0;
+
+            }
+            if (Choose == 1 && BotChoose == 2) // Камень и ножницы
+            {
+                PlayerPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                PlayerWins++;
+            }
+            if (Choose == 2 && BotChoose == 3) // ножницы и бумага
+            {
+                PlayerPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                PlayerWins++;
+            }
+            if (Choose == 3 && BotChoose == 1) // бумага и камень
+            {
+                PlayerPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                PlayerWins++;
+            }
+
+            if (Choose == 1 && BotChoose == 3) // Камень и бумага
+            {
+                OpponentPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                OpponentWins++;
+            }
+            if (Choose == 2 && BotChoose == 1) // ножницы и камень
+            {
+                OpponentPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                OpponentWins++;
+            }
+            if (Choose == 3 && BotChoose == 2) // бумага и ножницы
+            {
+                OpponentPoints += PlayerStavka + OpponentStavka;
+                PlayerStavka = 0;
+                OpponentStavka = 0;
+                OpponentWins++;
+            }
+        }
         public int minStavka()
         {
             return PlayerPoints / 100 * 20;
@@ -133,6 +223,12 @@ namespace SSP2.Model
         public int maxStavka()
         {
             return PlayerPoints / 100 * 40;
+        }
+
+        public int UpCheck()
+        {
+            check++;
+            return check;
         }
     }
 }
