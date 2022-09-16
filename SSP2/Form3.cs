@@ -20,7 +20,8 @@ namespace SSP2
         private void Form3_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "sPPDBDataSet.LeaderTable". При необходимости она может быть перемещена или удалена.
-            this.leaderTableTableAdapter.Fill(this.sPPDBDataSet.LeaderTable);
+            //this.leaderTableTableAdapter.Fill(this.sPPDBDataSet.LeaderTable);
+
 
         }
     }

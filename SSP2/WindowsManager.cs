@@ -1,4 +1,7 @@
-﻿namespace SSP2
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace SSP2
 {
     public class WindowsManager
     {
@@ -6,10 +9,12 @@
         public Form2 _form2;
 
         private Controller _controller;
+        private FormForDataGrid ffdg;
 
         public WindowsManager(Controller controller)
         {   
             _controller = controller;
+            ffdg = new FormForDataGrid();
         }
         public void CreateUser(string text)
         {
@@ -17,9 +22,14 @@
         }
         public void OpenTable()
         {
-            Form3 form3 = new Form3();
-            form3.Show();
-            form3.Activate();
+            GetResultsFromBD()
+
+        }
+        public void GetResultsFromBD(BindingList<DB.Player> blPS)
+        {
+            //FormForDataGrid dgForm = new FormForDataGrid(blPS);
+            ffdg.StartDataGrid(blPS);
+            ffdg.ShowDialog();
         }
     }
 }

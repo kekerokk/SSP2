@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="DB\Player.cs" />
+    <Compile Include="DB\Repository.cs" />
+    <Compile Include="DB\SoccerContext.cs" />
     <Compile Include="EventManager.cs" />
     <Compile Include="FixedLeaderBoard.Context.cs">
       <AutoGen>True</AutoGen>
@@ -90,6 +93,12 @@
     </Compile>
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormForDataGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormForDataGrid.Designer.cs">
+      <DependentUpon>FormForDataGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="LeaderBoard.Context.cs">
       <AutoGen>True</AutoGen>
@@ -144,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormForDataGrid.resx">
+      <DependentUpon>FormForDataGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
